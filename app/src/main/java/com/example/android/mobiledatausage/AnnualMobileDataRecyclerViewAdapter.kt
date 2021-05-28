@@ -2,8 +2,10 @@ package com.example.android.mobiledatausage
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.example.android.mobiledatausage.databinding.FragmentItemBinding
 
@@ -29,6 +31,12 @@ class AnnualMobileDataRecyclerViewAdapter(
         val item = values[position]
         holder.yearView.text = item.year.toString()
         holder.volumeView.text = item.volume.toString()
+        if(item.hasDecrease()) {
+            holder.imageView.visibility = View.VISIBLE
+            holder.imageView.setOnClickListener {
+                //TODO set a Toast Message
+            }
+        }
     }
 
     override fun getItemCount(): Int = values.size
@@ -36,6 +44,8 @@ class AnnualMobileDataRecyclerViewAdapter(
     inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val yearView: TextView = binding.year
         val volumeView: TextView = binding.volume
+        val imageView: ImageView = binding.imageView
+
 
     }
 
