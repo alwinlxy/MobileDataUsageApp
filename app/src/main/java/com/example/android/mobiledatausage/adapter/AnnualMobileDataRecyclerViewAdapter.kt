@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.example.android.mobiledatausage.database.DbAnuualMobileData
 import com.example.android.mobiledatausage.databinding.FragmentItemBinding
 
@@ -33,7 +34,7 @@ class AnnualMobileDataRecyclerViewAdapter(
         if(item.decrease) {
             holder.imageView.visibility = View.VISIBLE
             holder.imageView.setOnClickListener {
-                //TODO set a Toast Message
+                Toast.makeText(it.context, "Year ${item.year} has decrease in volume data", Toast.LENGTH_SHORT).show()
             }
         }
     }

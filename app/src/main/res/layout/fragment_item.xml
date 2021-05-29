@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp">
 
@@ -21,12 +23,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Year"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/volLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/text_margin"
+                android:layout_marginBottom="16dp"
+                android:text="Total Volume of Mobile Data (Petabytes)"
+                android:textAppearance="?attr/textAppearanceCaption"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/year" />
 
             <TextView
                 android:id="@+id/volume"
@@ -35,9 +49,9 @@
                 android:layout_margin="@dimen/text_margin"
                 android:layout_marginBottom="16dp"
                 android:text="Data Volume"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/volLabel"
                 app:layout_constraintTop_toBottomOf="@id/year" />
 
             <ImageView
@@ -45,9 +59,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/year"
                 app:srcCompat="@drawable/ic_baseline_trending_down_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

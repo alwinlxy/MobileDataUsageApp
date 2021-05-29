@@ -9,17 +9,37 @@
             type="com.example.android.mobiledatausage.viewmodel.DataViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:name="com.example.android.mobiledatausage.AnnualMobileDataFragment"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layoutManager="LinearLayoutManager"
-        android:scrollbarAlwaysDrawHorizontalTrack="false"
-        android:scrollbarAlwaysDrawVerticalTrack="false"
-        android:scrollbars="none"
-        tools:context=".AnnualMobileDataFragment"
-        tools:listitem="@layout/fragment_item" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            android:text="Mobile Data Usage from 2008 to 2018"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:name="com.example.android.mobiledatausage.AnnualMobileDataFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="48dp"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:scrollbars="none"
+            app:layoutManager="LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:context=".AnnualMobileDataFragment"
+            tools:layout_editor_absoluteX="8dp"
+            tools:listitem="@layout/fragment_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

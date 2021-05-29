@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
 class DataRepository(private val appDB: AppDatabase) {
 
     private val _records = MutableLiveData<List<DbAnuualMobileData>>()
-
     val records: LiveData<List<DbAnuualMobileData>>
         get() = _records
 
@@ -45,6 +44,12 @@ class DataRepository(private val appDB: AppDatabase) {
                 mockList.add(AnnualMobileData(2010, 0.789))
                 mockList.add(AnnualMobileData(2011, 0.321))
                 mockList.add(AnnualMobileData(2012, 0.654))
+                mockList.add(AnnualMobileData(2013, 0.123))
+                mockList.add(AnnualMobileData(2014, 0.456))
+                mockList.add(AnnualMobileData(2014, 0.789))
+                mockList.add(AnnualMobileData(2016, 0.321))
+                mockList.add(AnnualMobileData(2017, 0.654))
+                mockList.add(AnnualMobileData(2018, 0.789))
 
                 //transform to database model
                 val newList = mockList.map {
