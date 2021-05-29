@@ -1,52 +1,36 @@
 package com.example.android.mobiledatausage.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.android.mobiledatausage.database.AppDatabase
 import com.example.android.mobiledatausage.database.DbAnuualMobileData
 import com.example.android.mobiledatausage.model.AnnualMobileData
+import com.example.android.mobiledatausage.repository.DataRepository
+import kotlinx.coroutines.launch
 
-class DataViewModel : ViewModel() {
+class DataViewModel(app: Application) : AndroidViewModel(app) {
 
-    private val _response = MutableLiveData<List<AnnualMobileData>>()
-    val response: LiveData<List<AnnualMobileData>>
-        get() = _response
-
-    private val _recordList = MutableLiveData<List<DbAnuualMobileData>>()
+    //private val _recordList = MutableLiveData<List<DbAnuualMobileData>>()
     val recordList: LiveData<List<DbAnuualMobileData>>
-        get() = _recordList
+        get() = dataRepository.records
+
+    private val database = AppDatabase.getInstance(app)
+    private val dataRepository = DataRepository(database)
 
     init {
-        getMockData()
+        //get data from Repository
+        viewModelScope.launch {
+            dataRepository.getData()
+        }
     }
 
-    /*
-    For simulating a data source retrieval
-     */
-    private fun getMockData() {
-        //from network
-        val mockList = mutableListOf<AnnualMobileData>()
-        mockList.add(AnnualMobileData(2005, 0.123))
-        mockList.add(AnnualMobileData(2006, 0.456))
-        mockList.add(AnnualMobileData(2007, 0.789))
-        mockList.add(AnnualMobileData(2008, 0.321))
-        mockList.add(AnnualMobileData(2009, 0.654))
-        mockList.add(AnnualMobileData(2010, 0.987))
-
-        //transform to database model
-        val newList = mockList.map {
-            DbAnuualMobileData(
-                it.year,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                it.volume,
-                it.hasDecrease()
-            )
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DataViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return DataViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
         }
-
-        _recordList.value = newList
-
     }
 }
