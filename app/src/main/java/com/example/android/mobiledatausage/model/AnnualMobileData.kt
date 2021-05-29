@@ -1,11 +1,15 @@
 package com.example.android.mobiledatausage.model
 
-data class AnnualMobileData(val year:Int, val volume: Double) {
+data class AnnualMobileData(val year:Int) {
 
     //for the 4 quarters of the year
-    private val dataVolArr = Array<Double>(4){0.0}
+    private val dataVolArr = Array(4){0.0}
 
+    //return total for year
     fun getAnnualDataVol() : Double = dataVolArr.sum()
+
+    //return volume of that quarter
+    fun getQuarter(quarter: Int): Double =  dataVolArr[quarter-1]
 
     //if any of the quarter has a decrease over the previous quarter
     fun hasDecrease() : Boolean {
@@ -34,7 +38,5 @@ data class AnnualMobileData(val year:Int, val volume: Double) {
         dataVolArr[quarter-1] = dataVolume
         return true
     }
-
-
 
 }

@@ -25,7 +25,6 @@
                 android:layout_margin="@dimen/text_margin"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Year"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
                 android:layout_marginBottom="16dp"
-                android:text="Total Volume of Mobile Data (Petabytes)"
+                android:text="@string/volumelabel"
                 android:textAppearance="?attr/textAppearanceCaption"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/text_margin"
                 android:layout_marginBottom="16dp"
-                android:text="Data Volume"
                 android:textAppearance="?attr/textAppearanceSubtitle1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/volLabel"
@@ -59,9 +57,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/year"
-                app:srcCompat="@drawable/ic_baseline_trending_down_24" />
+                app:srcCompat="@drawable/ic_baseline_trending_down_24"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

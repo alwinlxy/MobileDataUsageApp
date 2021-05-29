@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.android.mobiledatausage.database.AppDatabase
 import com.example.android.mobiledatausage.database.DbAnuualMobileData
-import com.example.android.mobiledatausage.model.AnnualMobileData
 import com.example.android.mobiledatausage.repository.DataRepository
 import kotlinx.coroutines.launch
 
@@ -24,7 +23,7 @@ class DataViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(private val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DataViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")

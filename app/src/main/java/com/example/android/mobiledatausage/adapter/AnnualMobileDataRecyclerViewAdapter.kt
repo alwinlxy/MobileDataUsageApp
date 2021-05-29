@@ -30,7 +30,7 @@ class AnnualMobileDataRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.yearView.text = item.year.toString()
-        holder.volumeView.text = item.totalVolume.toString()
+        holder.volumeView.text = String.format("%.6f", item.totalVolume)
         if(item.decrease) {
             holder.imageView.visibility = View.VISIBLE
             holder.imageView.setOnClickListener {

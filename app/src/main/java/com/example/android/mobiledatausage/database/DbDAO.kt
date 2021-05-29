@@ -8,10 +8,6 @@ import androidx.room.Query
 @Dao
 interface DbDAO {
 
-    //for insert of new record
-    @Insert
-    fun insert(record: DbAnuualMobileData)
-
     //for insert of mutiple records
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg record: DbAnuualMobileData)
