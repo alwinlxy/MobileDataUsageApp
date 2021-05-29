@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.android.mobiledatausage.database.DbAnuualMobileData
 import com.example.android.mobiledatausage.databinding.FragmentItemBinding
 
 import com.example.android.mobiledatausage.model.AnnualMobileData
 
 class AnnualMobileDataRecyclerViewAdapter(
-    private val values: List<AnnualMobileData>
+    private val values: List<DbAnuualMobileData>
 ) : RecyclerView.Adapter<AnnualMobileDataRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,8 +31,8 @@ class AnnualMobileDataRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.yearView.text = item.year.toString()
-        holder.volumeView.text = item.volume.toString()
-        if(item.hasDecrease()) {
+        holder.volumeView.text = item.totalVolume.toString()
+        if(item.decrease) {
             holder.imageView.visibility = View.VISIBLE
             holder.imageView.setOnClickListener {
                 //TODO set a Toast Message

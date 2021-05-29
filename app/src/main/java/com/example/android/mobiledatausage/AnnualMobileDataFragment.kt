@@ -34,7 +34,7 @@ class AnnualMobileDataFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        viewModel.response.observe(viewLifecycleOwner, Observer {
+        viewModel.recordList.observe(viewLifecycleOwner, Observer {
             binding.recyclerView.adapter = AnnualMobileDataRecyclerViewAdapter(it)
         })
 
