@@ -1,4 +1,4 @@
-package com.example.android.mobiledatausage
+package com.example.android.mobiledatausage.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,8 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.example.android.mobiledatausage.database.DbAnuualMobileData
 import com.example.android.mobiledatausage.databinding.FragmentItemBinding
-
-import com.example.android.mobiledatausage.model.AnnualMobileData
 
 class AnnualMobileDataRecyclerViewAdapter(
     private val values: List<DbAnuualMobileData>
