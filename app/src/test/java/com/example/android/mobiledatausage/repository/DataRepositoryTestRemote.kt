@@ -13,7 +13,7 @@ import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-class DataRepositoryTest {
+class DataRepositoryTestRemote {
     private lateinit var mockServer: MockWebServer
     private lateinit var mockClient: OkHttpClient
     private lateinit var mockApi: RemoteApiService
