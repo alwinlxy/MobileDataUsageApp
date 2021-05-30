@@ -1,13 +1,14 @@
 package com.example.android.mobiledatausage.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.android.mobiledatausage.database.AppDatabase
 import com.example.android.mobiledatausage.database.DbAnuualMobileData
-import com.example.android.mobiledatausage.model.AnnualMobileData
 import com.example.android.mobiledatausage.network.DataApi
 import com.example.android.mobiledatausage.util.DataParser
+import com.example.android.mobiledatausage.util.ERROR
+import com.example.android.mobiledatausage.util.LOADING
+import com.example.android.mobiledatausage.util.SUCCESS
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,14 +18,19 @@ class DataRepository(private val appDB: AppDatabase) {
     val records: LiveData<List<DbAnuualMobileData>>
         get() = _records
 
+    private val _status = MutableLiveData<Int>()
+    val status: LiveData<Int>
+        get() = _status
+
     suspend fun getData() {
+        _status.postValue(LOADING)
         withContext(Dispatchers.IO) {
             val dbRecordList = appDB.dbDAO.getAllRecords()
             if(dbRecordList.isNotEmpty()) {
                 _records.postValue(dbRecordList)
+                _status.postValue(SUCCESS)
             } else {
                 getDataFromRemote()
-                //getDataFromLocalString()
             }
 
         }
@@ -35,28 +41,18 @@ class DataRepository(private val appDB: AppDatabase) {
         withContext(Dispatchers.IO) {
             try {
                 val response = DataApi.retrofitService.getData()
-                val recordList = DataParser.parseResponse(response)
-                appDB.dbDAO.insertAll(*recordList.toTypedArray())
-                _records.postValue(appDB.dbDAO.getAllRecords())
+                if (response.isSuccessful) {
+                    val recordList = DataParser.parseResponse(response.body().toString())
+                    appDB.dbDAO.insertAll(*recordList.toTypedArray())
+                    _records.postValue(appDB.dbDAO.getAllRecords())
+                    _status.postValue(SUCCESS)
+                } else {
+                    //response error
+                    _status.postValue(ERROR)
+                }
             } catch (e: Exception) {
-                Log.e("getDataFromRemote", "Error getting remote data")
-            }
-
-        }
-    }
-
-    private suspend fun getDataFromLocalString() {
-        withContext(Dispatchers.IO) {
-            try {
-
-                val str = "{\"help\": \"https://data.gov.sg/api/3/action/help_show?name=datastore_search\", \"success\": true, \"result\": {\"resource_id\": \"a807b7ab-6cad-4aa6-87d0-e283a7353a0f\", \"fields\": [{\"type\": \"int4\", \"id\": \"_id\"}, {\"type\": \"text\", \"id\": \"quarter\"}, {\"type\": \"numeric\", \"id\": \"volume_of_mobile_data\"}, {\"type\": \"int8\", \"id\": \"_full_count\"}, {\"type\": \"float4\", \"id\": \"rank\"}], \"q\": \"2008\", \"records\": [{\"volume_of_mobile_data\": \"0.171586\", \"quarter\": \"2008-Q1\", \"_id\": 15, \"_full_count\": \"4\", \"rank\": 0.0573088}, {\"volume_of_mobile_data\": \"0.248899\", \"quarter\": \"2008-Q2\", \"_id\": 16, \"_full_count\": \"4\", \"rank\": 0.0573088}, {\"volume_of_mobile_data\": \"0.439655\", \"quarter\": \"2008-Q3\", \"_id\": 17, \"_full_count\": \"4\", \"rank\": 0.0573088}, {\"volume_of_mobile_data\": \"0.683579\", \"quarter\": \"2008-Q4\", \"_id\": 18, \"_full_count\": \"4\", \"rank\": 0.0573088}], \"_links\": {\"start\": \"/api/action/datastore_search?q=2008&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f\", \"next\": \"/api/action/datastore_search?q=2008&offset=100&resource_id=a807b7ab-6cad-4aa6-87d0-e283a7353a0f\"}, \"total\": 4}}"
-                val recordList = DataParser.parseResponse(str)
-                appDB.dbDAO.insertAll(*recordList.toTypedArray())
-                _records.postValue(appDB.dbDAO.getAllRecords())
-            } catch (t: Throwable) {
-                Log.e("getDataFromRemote", "Error getting remote data")
+                _status.postValue(ERROR)
             }
         }
-
     }
 }

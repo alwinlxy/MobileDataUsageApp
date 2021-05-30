@@ -13,6 +13,9 @@ class DataViewModel(app: Application) : AndroidViewModel(app) {
     val recordList: LiveData<List<DbAnuualMobileData>>
         get() = dataRepository.records
 
+    val status: LiveData<Int>
+        get() = dataRepository.status
+
     private val database = AppDatabase.getInstance(app)
     private val dataRepository = DataRepository(database)
 

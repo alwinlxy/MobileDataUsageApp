@@ -1,6 +1,5 @@
 package com.example.android.mobiledatausage.util
 
-import android.util.Log
 import com.example.android.mobiledatausage.database.DbAnuualMobileData
 import com.example.android.mobiledatausage.model.AnnualMobileData
 import org.json.JSONArray
@@ -32,8 +31,8 @@ object DataParser {
 
         var result = Pair(0, 0)
         val arr = quarterStr.split("-Q")
-        var year: Int?
-        var quarter: Int?
+        val year: Int?
+        val quarter: Int?
         if (arr.size == 2) {
             year = arr.get(0).toIntOrNull()
             quarter = arr.get(1).toIntOrNull()
@@ -50,10 +49,10 @@ object DataParser {
     fun getAnnualMobileDataFromJsonObject(obj: JSONObject) : Pair<AnnualMobileData?, Int>{
 
         var result: Pair<AnnualMobileData?, Int> = Pair(null, 0)
-        var volume: Double
-        var quarterStr: String
-        var tempObj: AnnualMobileData
-        var pairResult: Pair<Int, Int>
+        val volume: Double
+        val quarterStr: String
+        val tempObj: AnnualMobileData
+        val pairResult: Pair<Int, Int>
         if(obj.has("volume_of_mobile_data") && obj.has("quarter")) {
             volume = obj.getDouble("volume_of_mobile_data")
             quarterStr = obj.getString("quarter")

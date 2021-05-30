@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MobileDataUsage</string>
-    <string name="year">Year</string>
     <string name="volumelabel">Total Volume of Mobile Data (Petabytes)</string>
+    <string name="header">Mobile Data Usage from 2008 to 2018</string>
+    <string name="loading">Loading …</string>
+    <string name="error">Error getting data</string>
 </resources>

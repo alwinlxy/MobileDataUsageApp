@@ -19,7 +19,7 @@
             android:layout_height="48dp"
             android:background="?attr/colorPrimary"
             android:gravity="center"
-            android:text="Mobile Data Usage from 2008 to 2018"
+            android:text="@string/header"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +39,20 @@
             tools:context=".AnnualMobileDataFragment"
             tools:layout_editor_absoluteX="8dp"
             tools:listitem="@layout/fragment_item" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="32dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
