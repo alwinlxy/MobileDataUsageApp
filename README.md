@@ -1,8 +1,12 @@
-MobileDataUsageApp
-- This is an app that will show the amount the of data sent over Singapore’s mobile networks from 2008 to 2018
+# MobileDataUsageApp
+This is an app that will show the amount the of data sent over Singapore’s mobile networks from 2008 to 2018
+
+<br>
 
 Data API
 - https://data.gov.sg/dataset/mobile-data-usage
+
+<br>
 
 Tasks
 - Setup Project
